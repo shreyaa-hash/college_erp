@@ -1,0 +1,8 @@
+Django>=5.0
+pandas>=2.0
+openpyxl>=3.1
+faker>=20.0
+numpy>=1.26
+gunicorn>=21.0
+whitenoise>=6.0
+django-environ>=0.11
