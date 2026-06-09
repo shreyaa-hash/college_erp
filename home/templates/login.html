@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height: calc(100vh - 250px);">
+    <div class="col-md-5">
+        <div class="card-premium p-4 animate-fade-in">
+            <div class="text-center mb-4">
+                <div class="card-icon card-icon-primary mx-auto">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+                <h2 class="fw-bold text-dark mt-2">Student Login</h2>
+                <p class="text-muted small">Enter your unique academic roll number to access your Digital Twin portal.</p>
+            </div>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="mb-4">
+                    <label for="roll_number" class="form-label fw-semibold text-dark">Roll Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-id-card text-muted"></i></span>
+                        <input 
+                            type="text" 
+                            name="roll_number" 
+                            id="roll_number"
+                            class="form-control form-control-custom border-start-0 ps-0" 
+                            placeholder="Enter your Roll Number" 
+                            required
+                        >
+                    </div>
+                </div>
+
+                <button class="btn btn-premium btn-premium-primary w-100 py-2.5">
+                    <i class="fa-solid fa-right-to-bracket me-2"></i>Sign In
+                </button>
+            </form>
+
+            {% if message %}
+                <div class="alert alert-danger mt-3 mb-0 py-2.5 text-center small border-0 shadow-sm" role="alert">
+                    <i class="fa-solid fa-triangle-exclamation me-1"></i> {{ message }}
+                </div>
+            {% endif %}
+            
+            <div class="text-center mt-4 border-top pt-3">
+                <p class="small text-muted mb-0">Don't have an account? <a href="/register/" class="fw-semibold text-primary">Register Student</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

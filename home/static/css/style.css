@@ -1,0 +1,236 @@
+/* Import Google Fonts - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --primary-light: #e0e7ff;
+    --secondary-color: #0ea5e9;
+    --secondary-hover: #0284c7;
+    --dark-color: #0f172a;
+    --light-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --transition-speed: 0.3s;
+    --border-radius: 12px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background-color: var(--light-bg);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Typography & Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+a:hover {
+    color: var(--primary-hover);
+}
+
+/* Navbar Custom Styling */
+.navbar-custom {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 0;
+}
+.navbar-custom .navbar-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #a5b4fc, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.navbar-custom .nav-link {
+    color: #e2e8f0 !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px;
+    transition: all var(--transition-speed) ease;
+}
+.navbar-custom .nav-link:hover, 
+.navbar-custom .nav-link.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
+}
+
+/* Main Container spacing */
+.main-wrapper {
+    flex: 1 0 auto;
+}
+
+/* Footer Styling */
+footer {
+    background-color: var(--dark-color);
+    color: #94a3b8;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+}
+
+/* Hero Section */
+.hero-section {
+    background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, rgba(14, 165, 233, 0.05) 90%);
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.hero-title {
+    font-weight: 800;
+    font-size: 3rem;
+    letter-spacing: -1px;
+    color: var(--dark-color);
+    line-height: 1.15;
+}
+.hero-title span {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Cards & Styling */
+.card-premium {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+.card-premium:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(79, 70, 229, 0.3);
+}
+.card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    transition: all var(--transition-speed) ease;
+}
+.card-icon-primary {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+.card-icon-secondary {
+    background-color: #e0f2fe;
+    color: var(--secondary-color);
+}
+.card-icon-success {
+    background-color: #d1fae5;
+    color: var(--success-color);
+}
+
+/* Buttons */
+.btn-premium {
+    font-weight: 600;
+    padding: 0.625rem 1.5rem;
+    border-radius: 8px;
+    transition: all var(--transition-speed) ease;
+}
+.btn-premium-primary {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+}
+.btn-premium-primary:hover {
+    background-color: var(--primary-hover);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+.btn-premium-secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+.btn-premium-secondary:hover {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Dashboard & Sidebars */
+.dashboard-container {
+    display: flex;
+    min-height: calc(100vh - 72px);
+}
+.sidebar {
+    width: 280px;
+    background-color: var(--dark-color);
+    color: #ffffff;
+    flex-shrink: 0;
+    transition: all var(--transition-speed) ease;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 0.875rem 1.5rem;
+    color: #94a3b8;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+    border-left: 3px solid transparent;
+}
+.sidebar-link i {
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+.sidebar-link:hover, .sidebar-link.active {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    border-left-color: var(--primary-color);
+}
+.dashboard-content {
+    flex-grow: 1;
+    padding: 2rem;
+    background-color: var(--light-bg);
+}
+
+/* Modern Form Controls */
+.form-control-custom {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: #ffffff;
+    transition: all var(--transition-speed) ease;
+}
+.form-control-custom:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}

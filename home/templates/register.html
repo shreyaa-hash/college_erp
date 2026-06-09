@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-7">
+        <div class="card-premium p-4 animate-fade-in shadow-lg">
+            <div class="text-center mb-4">
+                <div class="card-icon card-icon-success mx-auto">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <h2 class="fw-bold text-dark mt-2">Student Registration</h2>
+                <p class="text-muted small">Register a new profile with academic details to set up your digital twin.</p>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="row">
+                    {% for field in form %}
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label fw-semibold text-dark small mb-1">
+                                {{ field.label }}
+                            </label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ field.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-premium btn-premium-primary px-5 py-2.5">
+                        <i class="fa-solid fa-user-check me-2"></i>Create ERP Profile
+                    </button>
+                </div>
+            </form>
+
+            {% if message %}
+                <div class="mt-4 text-center">
+                    {% if "Successful" in message %}
+                        <div class="alert alert-success border-0 py-2.5 shadow-sm small" role="alert">
+                            <i class="fa-solid fa-circle-check me-1"></i> {{ message }}
+                            <div class="mt-2">
+                                <a href="/login/" class="btn btn-sm btn-success px-3 fw-bold text-white">Proceed to Login</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger border-0 py-2.5 shadow-sm small" role="alert">
+                            <i class="fa-solid fa-triangle-exclamation me-1"></i> {{ message }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

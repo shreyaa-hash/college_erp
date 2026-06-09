@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-4 text-start animate-fade-in">
+    <!-- Faculty Welcome Header -->
+    <div class="card-premium p-4 mb-4 text-white shadow-lg border-0" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+        <span class="small fw-semibold text-white-50 text-uppercase tracking-wider">Faculty Portal Workspace</span>
+        <h2 class="fw-bold mt-1 mb-2">Welcome Back, Professor {{ faculty.name }}!</h2>
+        <p class="mb-0 text-white-50">Department of {{ faculty.department }}. Use the options below to log attendance, publish exam metrics, schedule lecture hours, or post new announcements.</p>
+    </div>
+
+    <!-- Quick Stats Cards Row -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card-premium p-3 border-0 bg-white shadow-sm d-flex align-items-center">
+                <div class="card-icon card-icon-primary me-3 mb-0" style="width: 50px; height: 50px; font-size: 1.25rem;">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div>
+                    <span class="text-muted small fw-semibold d-block">TOTAL ENROLLED STUDENTS</span>
+                    <h4 class="fw-bold text-dark mb-0">{{ students_count }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card-premium p-3 border-0 bg-white shadow-sm d-flex align-items-center">
+                <div class="card-icon card-icon-secondary me-3 mb-0" style="width: 50px; height: 50px; font-size: 1.25rem;">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <div>
+                    <span class="text-muted small fw-semibold d-block">NOTICE BOARD ANNOUNCEMENTS</span>
+                    <h4 class="fw-bold text-dark mb-0">{{ notices_count }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card-premium p-3 border-0 bg-white shadow-sm d-flex align-items-center">
+                <div class="card-icon card-icon-success me-3 mb-0" style="width: 50px; height: 50px; font-size: 1.25rem;">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+                <div>
+                    <span class="text-muted small fw-semibold d-block">TIMETABLE SLOTS SCHEDULED</span>
+                    <h4 class="fw-bold text-dark mb-0">{{ timetable_count }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Shortcuts Grid -->
+    <h4 class="fw-bold text-dark mb-3"><i class="fa-solid fa-gears text-primary me-2"></i> Administrative Operations</h4>
+    <div class="row g-4">
+        <!-- Add Attendance -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="card-premium h-100 p-4 d-flex flex-column">
+                <div class="card-icon card-icon-primary">
+                    <i class="fa-solid fa-clipboard-user"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">Log Attendance</h5>
+                <p class="text-muted small flex-grow-1">Publish daily lecture attendance status logs for student profiles.</p>
+                <a href="/add-attendance/" class="btn btn-premium btn-premium-primary w-100 mt-3">
+                    <i class="fa-solid fa-plus me-1"></i>Add Attendance
+                </a>
+            </div>
+        </div>
+
+        <!-- Add Marks -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="card-premium h-100 p-4 d-flex flex-column">
+                <div class="card-icon card-icon-secondary">
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">Publish Grades</h5>
+                <p class="text-muted small flex-grow-1">Add internal exam, quiz, or final semester grade points to the database.</p>
+                <a href="/add-marks/" class="btn btn-premium btn-premium-secondary w-100 mt-3">
+                    <i class="fa-solid fa-plus me-1"></i>Publish Marks
+                </a>
+            </div>
+        </div>
+
+        <!-- Add Timetable Slot -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="card-premium h-100 p-4 d-flex flex-column">
+                <div class="card-icon card-icon-success">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">Add Timetable Slot</h5>
+                <p class="text-muted small flex-grow-1">Schedule daily time allocations, subjects, and assigned professors.</p>
+                <a href="/add-timetable/" class="btn btn-outline-success w-100 mt-3 btn-premium">
+                    <i class="fa-solid fa-plus me-1"></i>Add Schedule
+                </a>
+            </div>
+        </div>
+
+        <!-- Publish Notice -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="card-premium h-100 p-4 d-flex flex-column">
+                <div class="card-icon card-icon-primary" style="background-color: #fef3c7; color: #d97706;">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">Post Announcement</h5>
+                <p class="text-muted small flex-grow-1">Post updates, deadline alerts, or academic circulars on the dashboard.</p>
+                <a href="/add-notice/" class="btn btn-outline-warning w-100 mt-3 btn-premium">
+                    <i class="fa-solid fa-plus me-1"></i>Post Notice
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Administrative Search, Data Management & Registry Actions -->
+    <div class="row g-4 mt-3">
+        <div class="col-md-4">
+            <div class="card-premium p-4 d-flex align-items-center justify-content-between h-100 flex-column text-center">
+                <div class="card-icon card-icon-primary mx-auto mb-2" style="width: 50px; height: 50px; font-size: 1.25rem;">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h6 class="fw-bold text-dark mb-1">Search Registry</h6>
+                <p class="text-muted small mb-3">Lookup student information folders via roll number.</p>
+                <a href="/search-student/" class="btn btn-premium btn-premium-primary w-100 mt-auto">Search</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card-premium p-4 d-flex align-items-center justify-content-between h-100 flex-column text-center">
+                <div class="card-icon card-icon-primary mx-auto mb-2" style="width: 50px; height: 50px; font-size: 1.25rem; background-color: #e0f2fe; color: var(--secondary-color);">
+                    <i class="fa-solid fa-file-import"></i>
+                </div>
+                <h6 class="fw-bold text-dark mb-1">Data Management</h6>
+                <p class="text-muted small mb-3">Bulk import CSV/Excel, validate formats, export data logs.</p>
+                <a href="/data-management/" class="btn btn-premium btn-premium-secondary w-100 mt-auto">Open Workspace</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card-premium p-4 d-flex align-items-center justify-content-between h-100 flex-column text-center">
+                <div class="card-icon card-icon-secondary mx-auto mb-2" style="width: 50px; height: 50px; font-size: 1.25rem; background-color: #fce7f3; color: #db2777;">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h6 class="fw-bold text-dark mb-1">Django Admin Panel</h6>
+                <p class="text-muted small mb-3">Access database schemas and model records directly.</p>
+                <a href="/admin/" target="_blank" class="btn btn-outline-danger btn-premium w-100 mt-auto">Open Admin</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

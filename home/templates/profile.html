@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-4 text-start animate-fade-in">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card-premium p-4 shadow-lg mb-4">
+                <!-- Header Details -->
+                <div class="d-flex align-items-center pb-4 border-bottom mb-4">
+                    {% if student.profile_pic %}
+                        <img src="{{ student.profile_pic.url }}" alt="Profile Picture" class="rounded-circle border border-primary p-1 me-3" style="width: 100px; height: 100px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-icon card-icon-primary rounded-circle me-3 mb-0" style="width: 100px; height: 100px; font-size: 2.2rem;">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <h2 class="fw-bold text-dark mb-1">{{ student.name }}</h2>
+                        <p class="text-muted mb-2">Roll Number: <strong>{{ student.roll_number }}</strong></p>
+                        <span class="badge bg-primary px-3 py-1.5 rounded-pill">{{ student.branch }} | {{ student.year }}</span>
+                    </div>
+                </div>
+
+                <!-- Profile Data Grid -->
+                <div class="row g-4">
+                    <!-- Column 1: Core Details -->
+                    <div class="col-md-6">
+                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-3"><i class="fa-solid fa-address-card text-primary me-2"></i> Contact & Identity</h5>
+                        
+                        <div class="mb-3">
+                            <span class="text-muted small d-block">Email Address</span>
+                            <span class="text-dark fw-semibold">{{ student.email }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-muted small d-block">Phone Number</span>
+                            <span class="text-dark fw-semibold">{{ student.phone }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-muted small d-block">Branch Course</span>
+                            <span class="text-dark fw-semibold">{{ student.branch }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-muted small d-block">Academic Year</span>
+                            <span class="text-dark fw-semibold">{{ student.year }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: AI Digital Twin Variables -->
+                    <div class="col-md-6">
+                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-3"><i class="fa-solid fa-robot text-primary me-2"></i> AI Digital Twin Setup</h5>
+                        
+                        <div class="mb-3">
+                            <span class="text-muted small d-block">GitHub Profile Link</span>
+                            {% if student.github_profile %}
+                                <a href="{{ student.github_profile }}" target="_blank" class="fw-semibold text-primary"><i class="fa-brands fa-github me-1"></i> View Github</a>
+                            {% else %}
+                                <span class="text-danger small"><i class="fa-solid fa-circle-xmark me-1"></i> Profile not configured</span>
+                            {% endif %}
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <span class="text-muted small d-block">Daily Study Hours</span>
+                                <span class="text-dark fw-semibold">{{ student.study_hours_per_day }} Hours</span>
+                            </div>
+                            <div class="col-6">
+                                <span class="text-muted small d-block">Weekly Coding Hours</span>
+                                <span class="text-dark fw-semibold">{{ student.coding_hours_per_week }} Hours</span>
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <span class="text-muted small d-block">Communication rating</span>
+                                <span class="text-dark fw-semibold">{{ student.communication_score }} / 10</span>
+                            </div>
+                            <div class="col-6">
+                                <span class="text-muted small d-block">Current Stress Level</span>
+                                <span class="text-dark fw-semibold">{{ student.stress_rating }} / 10</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-muted small d-block">Placement Targets</span>
+                            <span class="text-success fw-bold">{{ student.dream_company }}</span>
+                            <span class="text-muted small">targeting</span>
+                            <span class="text-dark fw-bold">{{ student.target_package }} LPA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Links -->
+                <div class="d-flex gap-3 justify-content-end border-top pt-4 mt-4">
+                    <a href="/dashboard/" class="btn btn-premium btn-premium-secondary">
+                        <i class="fa-solid fa-chevron-left me-1"></i> Dashboard
+                    </a>
+                    <a href="/edit-profile/" class="btn btn-premium btn-premium-primary">
+                        <i class="fa-solid fa-user-pen me-1"></i> Modify Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

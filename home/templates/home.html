@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="animate-fade-in">
+    <!-- Hero Section -->
+    <section class="hero-section py-5 mb-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Text Content -->
+                <div class="col-lg-6 mb-4 mb-lg-0 text-start">
+                    <span class="badge bg-primary-light text-primary px-3 py-2 rounded-pill mb-3 fw-bold text-uppercase tracking-wider">
+                        Next-Gen ERP System
+                    </span>
+                    <h1 class="hero-title mb-3">
+                        Empowering Academics with <span>EduPortal ERP</span>
+                    </h1>
+                    <p class="hero-subtitle mb-4 text-muted">
+                        A robust, intuitive, and feature-rich ERP solution for students and faculty. Track daily attendance, view exam results, manage course timetables, and stay updated with real-time academic announcements.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="/login/" class="btn btn-premium btn-premium-primary shadow-sm">
+                            <i class="fa-solid fa-graduation-cap me-2"></i> Student Portal
+                        </a>
+                        <a href="/faculty-login/" class="btn btn-premium btn-premium-secondary">
+                            <i class="fa-solid fa-user-tie me-2"></i> Faculty Admin
+                        </a>
+                    </div>
+                </div>
+                <!-- Banner Image -->
+                <div class="col-lg-6 text-center">
+                    <img src="{% static 'images/hero_banner.png' %}" alt="EduPortal ERP Dashboard Banner" class="img-fluid rounded-4 shadow-lg border border-light" style="max-height: 380px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Portal Cards -->
+    <section class="container mb-5">
+        <div class="row g-4">
+            <!-- Student Login Card -->
+            <div class="col-md-4">
+                <div class="card-premium h-100 p-4 d-flex flex-column text-start">
+                    <div class="card-icon card-icon-primary">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <h4 class="fw-bold mb-2 text-dark">Student Corner</h4>
+                    <p class="text-muted flex-grow-1">Access your academic record, download report cards, track attendance, and view schedules.</p>
+                    <a href="/login/" class="btn btn-premium btn-premium-primary w-100 mt-3">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i>Login as Student
+                    </a>
+                </div>
+            </div>
+
+            <!-- Faculty Login Card -->
+            <div class="col-md-4">
+                <div class="card-premium h-100 p-4 d-flex flex-column text-start">
+                    <div class="card-icon card-icon-secondary">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    <h4 class="fw-bold mb-2 text-dark">Faculty Admin</h4>
+                    <p class="text-muted flex-grow-1">Manage student attendance logs, add final grades, create timetables, and publish notifications.</p>
+                    <a href="/faculty-login/" class="btn btn-premium btn-premium-secondary w-100 mt-3">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i>Login as Faculty
+                    </a>
+                </div>
+            </div>
+
+            <!-- Student Registration Card -->
+            <div class="col-md-4">
+                <div class="card-premium h-100 p-4 d-flex flex-column text-start">
+                    <div class="card-icon card-icon-success">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <h4 class="fw-bold mb-2 text-dark">Enroll Today</h4>
+                    <p class="text-muted flex-grow-1">Are you a new student? Complete the quick registration process to receive your ERP credentials.</p>
+                    <a href="/register/" class="btn btn-outline-success w-100 mt-3 btn-premium">
+                        <i class="fa-solid fa-user-pen me-2"></i>Register Student
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed ERP Features / About Section -->
+    <section class="bg-white py-5 border-top border-bottom border-light">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-3 text-dark">Comprehensive ERP Features</h2>
+            <p class="text-muted mx-auto mb-5" style="max-width: 600px;">
+                Designed to cover every operational aspect of modern departments, facilitating smooth communication between faculties and students.
+            </p>
+            <div class="row g-4 text-start">
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-start p-3">
+                        <div class="text-primary fs-3 me-3 mt-1">
+                            <i class="fa-solid fa-clipboard-user"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">Attendance System</h5>
+                            <p class="text-muted small">Real-time attendance logs, visual progress bars, percentage indicators, and total records.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-start p-3">
+                        <div class="text-primary fs-3 me-3 mt-1">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">Marks Gradebook</h5>
+                            <p class="text-muted small">Instant publication of assessment grades, automatic percentage computations, and CGPA indicators.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-start p-3">
+                        <div class="text-primary fs-3 me-3 mt-1">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">Notice Board</h5>
+                            <p class="text-muted small">Faculty-managed announcements instantly broadcast to student dashboards, keeping everyone aligned.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-start p-3">
+                        <div class="text-primary fs-3 me-3 mt-1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">Smart Timetables</h5>
+                            <p class="text-muted small">Daily schedules detailing times, assigned subjects, and faculty details for straightforward navigation.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-start p-3">
+                        <div class="text-primary fs-3 me-3 mt-1">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">Result Cards</h5>
+                            <p class="text-muted small">Auto-generated academic transcript cards complete with totals, percentage, and one-click PDF downloads.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-start p-3">
+                        <div class="text-primary fs-3 me-3 mt-1">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">Quick Search</h5>
+                            <p class="text-muted small">Easily lookup student records by roll numbers for administrative access and rapid inquiries.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

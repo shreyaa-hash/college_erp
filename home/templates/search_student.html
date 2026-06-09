@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-8">
+        <!-- Search Card -->
+        <div class="card-premium p-4 animate-fade-in mb-4">
+            <div class="d-flex align-items-center mb-3">
+                <div class="card-icon card-icon-secondary me-3 mb-0" style="width: 50px; height: 50px; font-size: 1.25rem;">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div>
+                    <h3 class="fw-bold text-dark mb-0">Search Student Records</h3>
+                    <p class="text-muted small mb-0">Retrieve details of a registered student using their academic roll number.</p>
+                </div>
+            </div>
+            
+            <form method="POST" class="row g-2 align-items-center">
+                {% csrf_token %}
+                <div class="col-md-9">
+                    <input 
+                        type="text" 
+                        name="roll_number" 
+                        class="form-control form-control-custom py-2.5" 
+                        placeholder="Enter Student Roll Number" 
+                        required
+                    >
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-premium btn-premium-primary w-100 py-2.5">
+                        <i class="fa-solid fa-search me-2"></i>Search Record
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Results Display -->
+        {% if searched %}
+            {% if student %}
+                <div class="card-premium p-4 animate-fade-in shadow-lg">
+                    <div class="d-flex align-items-center pb-3 border-bottom mb-4">
+                        {% if student.profile_pic %}
+                            <img src="{{ student.profile_pic.url }}" alt="Profile Picture" class="rounded-circle border border-primary p-1 me-3" style="width: 70px; height: 70px; object-fit: cover;">
+                        {% else %}
+                            <div class="card-icon card-icon-primary rounded-circle me-3 mb-0" style="width: 70px; height: 70px; font-size: 1.8rem;">
+                                <i class="fa-solid fa-user-graduate"></i>
+                            </div>
+                        {% endif %}
+                        <div>
+                            <h4 class="fw-bold text-dark mb-0">{{ student.name }}</h4>
+                            <span class="badge bg-primary px-3 py-1.5 rounded-pill small mt-1">{{ student.branch }} | {{ student.year }}</span>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded-3">
+                                <span class="text-muted small d-block">Roll Number</span>
+                                <span class="fw-bold text-dark">{{ student.roll_number }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded-3">
+                                <span class="text-muted small d-block">Email Address</span>
+                                <span class="fw-bold text-dark">{{ student.email }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded-3">
+                                <span class="text-muted small d-block">Phone number</span>
+                                <span class="fw-bold text-dark">{{ student.phone }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded-3">
+                                <span class="text-muted small d-block">Dream Target Company</span>
+                                <span class="fw-bold text-success">{{ student.dream_company }} ({{ student.target_package }} LPA Target)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-warning border-0 shadow-sm py-4 text-center animate-fade-in" role="alert">
+                    <i class="fa-solid fa-circle-question fs-2 mb-2 d-block text-warning"></i>
+                    <h5 class="fw-bold">No Records Found</h5>
+                    <p class="text-muted small mb-0">No student profile is registered under the specified roll number. Double check your query and try again.</p>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

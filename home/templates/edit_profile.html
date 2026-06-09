@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-4 text-start animate-fade-in">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card-premium p-4 shadow-lg">
+                <div class="d-flex align-items-center pb-3 border-bottom mb-4">
+                    <div class="card-icon card-icon-primary me-3 mb-0" style="width: 50px; height: 50px; font-size: 1.25rem;">
+                        <i class="fa-solid fa-user-pen"></i>
+                    </div>
+                    <div>
+                        <h3 class="fw-bold text-dark mb-0">Edit Profile & Digital Twin parameters</h3>
+                        <p class="text-muted small mb-0">Update your data variables to recalculate predictions in the Digital Twin module.</p>
+                    </div>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <!-- Left Sub-column: Personal Details -->
+                        <div class="col-md-6 border-end pe-md-4">
+                            <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-address-card text-primary me-2"></i> Academic Coordinates</h5>
+                            
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold text-muted mb-1">Email Address</label>
+                                {{ form.email }}
+                                {{ form.email.errors }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold text-muted mb-1">Phone Number</label>
+                                {{ form.phone }}
+                                {{ form.phone.errors }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold text-muted mb-1">Branch Course</label>
+                                {{ form.branch }}
+                                {{ form.branch.errors }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold text-muted mb-1">Academic Year</label>
+                                {{ form.year }}
+                                {{ form.year.errors }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold text-muted mb-1">Profile Photo</label>
+                                {{ form.profile_pic }}
+                                {{ form.profile_pic.errors }}
+                            </div>
+                        </div>
+
+                        <!-- Right Sub-column: AI Parameters & Projections -->
+                        <div class="col-md-6 ps-md-4">
+                            <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-robot text-primary me-2"></i> Twin Inputs & Targets</h5>
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold text-muted mb-1">GitHub Profile Link</label>
+                                {{ form.github_profile }}
+                                {{ form.github_profile.errors }}
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-6 mb-3">
+                                    <label class="form-label small fw-semibold text-muted mb-1">Daily Study Hours</label>
+                                    {{ form.study_hours_per_day }}
+                                    {{ form.study_hours_per_day.errors }}
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label class="form-label small fw-semibold text-muted mb-1">Weekly Coding Hours</label>
+                                    {{ form.coding_hours_per_week }}
+                                    {{ form.coding_hours_per_week.errors }}
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-6 mb-3">
+                                    <label class="form-label small fw-semibold text-muted mb-1">Communication (1-10)</label>
+                                    {{ form.communication_score }}
+                                    {{ form.communication_score.errors }}
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label class="form-label small fw-semibold text-muted mb-1">Current Stress Level (1-10)</label>
+                                    {{ form.stress_rating }}
+                                    {{ form.stress_rating.errors }}
+                                </div>
+                            </div>
+
+                            <h6 class="fw-bold text-dark mt-3 mb-2 border-top pt-2">Career & Workload</h6>
+                            <div class="row g-3">
+                                <div class="col-6 mb-3">
+                                    <label class="form-label small fw-semibold text-muted mb-1">Dream Company</label>
+                                    {{ form.dream_company }}
+                                    {{ form.dream_company.errors }}
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label class="form-label small fw-semibold text-muted mb-1">Target Package (LPA)</label>
+                                    {{ form.target_package }}
+                                    {{ form.target_package.errors }}
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-6 mb-3">
+                                    <label class="form-label small fw-semibold text-muted mb-1">Target CGPA</label>
+                                    {{ form.target_cgpa }}
+                                    {{ form.target_cgpa.errors }}
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label class="form-label small fw-semibold text-muted mb-1">Assignments Done</label>
+                                    {{ form.assignments_completed }}
+                                    {{ form.assignments_completed.errors }}
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold text-muted mb-1">Total Assigned Items</label>
+                                {{ form.total_assignments }}
+                                {{ form.total_assignments.errors }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-3 border-top pt-3 mt-3">
+                        <a href="/profile/" class="btn btn-premium btn-premium-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-premium btn-premium-primary">
+                            <i class="fa-solid fa-floppy-disk me-1"></i>Save Metrics
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

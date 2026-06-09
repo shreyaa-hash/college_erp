@@ -1,0 +1,32 @@
+# Gitignore for Django project
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Database
+db.sqlite3
+
+# Virtual Environments
+.venv/
+myenv/
+venv/
+ENV/
+env/
+
+# Media and uploads
+media/
+static/images/hero_banner.png
+students_test.xlsx
+students_test.csv
+faculty_test.xlsx
+test_import_client.py
+generate_test_sheets.py
+
+# Local development / IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store

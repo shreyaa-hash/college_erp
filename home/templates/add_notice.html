@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-6 text-start">
+        <div class="card-premium p-4 shadow-lg animate-fade-in">
+            <div class="d-flex align-items-center pb-3 border-bottom mb-4">
+                <div class="card-icon card-icon-primary me-3 mb-0" style="width: 50px; height: 50px; font-size: 1.25rem; background-color: #fef3c7; color: #d97706;">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <div>
+                    <h3 class="fw-bold text-dark mb-0">Publish Notice Announcement</h3>
+                    <p class="text-muted small mb-0">Broadcast alerts, assignments, or events to student dashboards.</p>
+                </div>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label fw-semibold text-dark small mb-1">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ field.errors|join:", " }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="d-flex justify-content-end gap-3 mt-4 border-top pt-3">
+                    <a href="/faculty-dashboard/" class="btn btn-premium btn-premium-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-premium btn-premium-primary" style="background-color: #d97706; color: white; border: none;">
+                        <i class="fa-solid fa-circle-plus me-1"></i>Publish Notice
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

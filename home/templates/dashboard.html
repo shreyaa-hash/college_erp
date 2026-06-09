@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid animate-fade-in px-0">
+    <div class="row g-4">
+        <!-- Sidebar Navigation (Col 3) -->
+        <div class="col-lg-3">
+            <div class="card-premium p-4 text-center sticky-top" style="top: 24px; z-index: 100;">
+                <!-- Profile Image / Fallback -->
+                <div class="position-relative d-inline-block mb-3">
+                    {% if student.profile_pic %}
+                        <img src="{{ student.profile_pic.url }}" alt="Profile Picture" class="rounded-circle border border-primary p-1" style="width: 100px; height: 100px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-icon card-icon-primary rounded-circle mx-auto mb-0" style="width: 100px; height: 100px; font-size: 2.2rem;">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <h5 class="fw-bold text-dark mb-1">{{ student.name }}</h5>
+                <p class="text-muted small mb-3">Roll No: {{ student.roll_number }}</p>
+                <div class="badge bg-primary-light text-primary px-3 py-1.5 rounded-pill mb-4">{{ student.branch }} | {{ student.year }}</div>
+
+                <div class="list-group list-group-flush text-start border-top pt-3">
+                    <a href="/dashboard/" class="list-group-item list-group-item-action border-0 px-2 py-2.5 active rounded-2 mb-1">
+                        <i class="fa-solid fa-gauge me-2"></i> Dashboard Home
+                    </a>
+                    <a href="/profile/" class="list-group-item list-group-item-action border-0 px-2 py-2.5 rounded-2 mb-1">
+                        <i class="fa-solid fa-user me-2"></i> My Profile
+                    </a>
+                    <a href="/edit-profile/" class="list-group-item list-group-item-action border-0 px-2 py-2.5 rounded-2 mb-1">
+                        <i class="fa-solid fa-user-pen me-2"></i> Edit Details
+                    </a>
+                    <a href="/search-student/" class="list-group-item list-group-item-action border-0 px-2 py-2.5 rounded-2 mb-1">
+                        <i class="fa-solid fa-magnifying-glass me-2"></i> Search Registry
+                    </a>
+                    <a href="/logout/" class="list-group-item list-group-item-action border-0 px-2 py-2.5 rounded-2 text-danger">
+                        <i class="fa-solid fa-right-from-bracket me-2"></i> Sign Out
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Workspace (Col 9) -->
+        <div class="col-lg-9">
+            <!-- Welcome Jumbotron -->
+            <div class="card-premium p-4 mb-4 text-start border-0 text-white shadow-lg" style="background: linear-gradient(135deg, #4f46e5, #0ea5e9);">
+                <span class="small fw-semibold text-white-50 text-uppercase tracking-wider">AI Digital Twin System</span>
+                <h2 class="fw-bold mt-1 mb-2">Welcome Back, {{ student.name }}!</h2>
+                <p class="mb-0 text-white-50">Here is your academic dashboard. The AI Digital Twin engine is indexing your data variables to calculate academic performance forecasts.</p>
+            </div>
+
+            <!-- Stats Analytics Cards Row -->
+            <div class="row g-3 mb-4">
+                <!-- Attendance Rate Widget -->
+                <div class="col-sm-6 col-md-3">
+                    <div class="card-premium p-3 text-start">
+                        <span class="text-muted small fw-semibold d-block">ATTENDANCE RATE</span>
+                        <h3 class="fw-bold text-dark mt-1 mb-2">{{ attendance_percentage }}%</h3>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar {% if attendance_percentage >= 75 %}bg-success{% elif attendance_percentage >= 60 %}bg-warning{% else %}bg-danger{% endif %}" 
+                                 role="progressbar" 
+                                 style="width: {{ attendance_percentage }}%" 
+                                 aria-valuenow="{{ attendance_percentage }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100"></div>
+                        </div>
+                        <span class="text-muted small d-block mt-2">{{ present_count }} Present / {{ absent_count }} Absent</span>
+                    </div>
+                </div>
+
+                <!-- SGPA/CGPA Widget -->
+                <div class="col-sm-6 col-md-3">
+                    <div class="card-premium p-3 text-start">
+                        <span class="text-muted small fw-semibold d-block">CGPA METRIC</span>
+                        <h3 class="fw-bold text-dark mt-1 mb-2">{{ cgpa }} / 10</h3>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-primary" 
+                                 role="progressbar" 
+                                 style="width: {{ percentage }}%" 
+                                 aria-valuenow="{{ percentage }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100"></div>
+                        </div>
+                        <span class="text-muted small d-block mt-2">Agg. Score: {{ percentage }}%</span>
+                    </div>
+                </div>
+
+                <!-- Assignment Workload Widget -->
+                <div class="col-sm-6 col-md-3">
+                    <div class="card-premium p-3 text-start">
+                        <span class="text-muted small fw-semibold d-block">WORKLOAD SUBMISSIONS</span>
+                        <h3 class="fw-bold text-dark mt-1 mb-2">
+                            {% widthratio student.assignments_completed 1 100 as completed_percent %}
+                            {{ student.assignments_completed }} / {{ student.total_assignments }}
+                        </h3>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-info" 
+                                 role="progressbar" 
+                                 style="width: {% if student.total_assignments > 0 %}{% widthratio student.assignments_completed student.total_assignments 100 %}{% else %}0{% endif %}%" 
+                                 aria-valuenow="{{ student.assignments_completed }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="{{ student.total_assignments }}"></div>
+                        </div>
+                        <span class="text-muted small d-block mt-2">Remaining Tasks: {{ student.total_assignments|add:"-student.assignments_completed" }}</span>
+                    </div>
+                </div>
+
+                <!-- Twin Target Goal Widget -->
+                <div class="col-sm-6 col-md-3">
+                    <div class="card-premium p-3 text-start">
+                        <span class="text-muted small fw-semibold d-block">CAREER TARGET</span>
+                        <h3 class="fw-bold text-success mt-1 mb-2">{{ student.dream_company }}</h3>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <span class="text-muted small d-block mt-2">Target Package: {{ student.target_package }} LPA</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Analytics Details Panels -->
+            <div class="row g-4 text-start">
+                <!-- Left Details Col: Attendance & Marks (Col 7) -->
+                <div class="col-xl-8">
+                    <!-- Attendance Card -->
+                    <div class="card-premium p-4 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-clipboard-user text-primary me-2"></i> Attendance Log</h5>
+                            <span class="badge bg-light text-dark">{{ attendance.count }} Lectures Tracked</span>
+                        </div>
+                        <div class="table-responsive" style="max-height: 250px; overflow-y: auto;">
+                            <table class="table align-middle table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Subject Course</th>
+                                        <th>Date</th>
+                                        <th class="text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for record in attendance %}
+                                        <tr>
+                                            <td class="fw-semibold text-dark">{{ record.subject }}</td>
+                                            <td class="text-muted small">{{ record.date }}</td>
+                                            <td class="text-center">
+                                                {% if record.status == 'Present' %}
+                                                    <span class="badge bg-success-light text-success px-2.5 py-1 rounded"><i class="fa-solid fa-circle-check me-1"></i> Present</span>
+                                                {% else %}
+                                                    <span class="badge bg-danger-light text-danger px-2.5 py-1 rounded"><i class="fa-solid fa-circle-xmark me-1"></i> Absent</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="3" class="text-center py-4 text-muted small">No attendance records have been registered for your profile yet.</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Marks Gradebook Card -->
+                    <div class="card-premium p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-chart-bar text-primary me-2"></i> Academic Gradebook</h5>
+                            <span class="badge bg-primary">{{ marks.count }} Assessments</span>
+                        </div>
+                        <div class="table-responsive" style="max-height: 250px; overflow-y: auto;">
+                            <table class="table align-middle table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Score</th>
+                                        <th>Scale %</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for score in marks %}
+                                        <tr>
+                                            <td class="fw-semibold text-dark">{{ score.subject }}</td>
+                                            <td class="text-dark">{{ score.marks }} <span class="text-muted small">/ {{ score.total_marks }}</span></td>
+                                            <td>
+                                                {% widthratio score.marks score.total_marks 100 as score_percent %}
+                                                <span class="fw-bold text-primary">{{ score_percent }}%</span>
+                                            </td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="3" class="text-center py-4 text-muted small">No marks records have been published for your profile.</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Details Col: Schedule & Notices (Col 4) -->
+                <div class="col-xl-4">
+                    <!-- Daily Schedule Timetable -->
+                    <div class="card-premium p-4 mb-4">
+                        <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-clock text-primary me-2"></i> Class Timetable</h5>
+                        <div class="list-group list-group-flush" style="max-height: 250px; overflow-y: auto;">
+                            {% for slot in timetable %}
+                                <div class="list-group-item px-0 py-2.5 border-0 border-bottom">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-0 fw-bold text-dark text-truncate" style="max-width: 170px;">{{ slot.subject }}</h6>
+                                            <small class="text-muted">{{ slot.faculty }} | {{ slot.day }}</small>
+                                        </div>
+                                        <span class="badge bg-secondary-light text-secondary rounded small">{{ slot.time }}</span>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p class="text-center py-3 text-muted small mb-0">No timetable schedule loaded.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Notice Board Broadcasts -->
+                    <div class="card-premium p-4">
+                        <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-bullhorn text-primary me-2"></i> Announcements</h5>
+                        <div class="list-group list-group-flush" style="max-height: 250px; overflow-y: auto;">
+                            {% for notice in notices %}
+                                <div class="list-group-item px-0 py-3 border-0 border-bottom">
+                                    <h6 class="fw-bold text-dark mb-1">{{ notice.title }}</h6>
+                                    <p class="text-muted small mb-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ notice.message }}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-muted" style="font-size: 0.75rem;"><i class="fa-regular fa-calendar me-1"></i> {{ notice.date }}</span>
+                                        {% if notice.subject %}
+                                            <span class="badge bg-light text-muted small">{{ notice.subject }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p class="text-center py-3 text-muted small mb-0">No announcements posted on the board.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
