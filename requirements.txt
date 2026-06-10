@@ -6,3 +6,4 @@ numpy>=1.26
 gunicorn>=21.0
 whitenoise>=6.0
 django-environ>=0.11
+psycopg2-binary>=2.9.9
